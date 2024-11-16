@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Juego</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #f6d365, #fda085);
+            font-family: 'Comic Sans MS', cursive, sans-serif; /* Fuente amigable */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+
+        .JUEGO {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 450px;
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .botones {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .botones button {
+            padding: 12px 18px;
+            border-radius: 12px;
+            background-color: #ff6347;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .botones button:hover {
+            background-color: #ff4500;
+            transform: scale(1.1);
+        }
+
+        #piedra {
+            background-color: #9e9e9e;
+            color: white;
+        }
+
+        #fuego {
+            background-color: #ff5733;
+            color: white;
+        }
+
+        #tijeras {
+            background-color: #f1c40f;
+            color: white;
+        }
+
+        #serpiente {
+            background-color: #27ae60;
+            color: white;
+        }
+
+        #humano {
+            background-color: #3498db;
+            color: white;
+        }
+
+        #arbol {
+            background-color: #2ecc71;
+            color: white;
+        }
+
+        #lobo {
+            background-color: #8e44ad;
+            color: white;
+        }
+
+        #esponja {
+            background-color: #f39c12;
+            color: white;
+        }
+
+        #papel {
+            background-color: #2980b9;
+            color: white;
+        }
+
+        #aire {
+            background-color: #00bfff;
+            color: white;
+        }
+
+        #agua {
+            background-color: #1abc9c;
+            color: white;
+        }
+
+        #dragon {
+            background-color: #c0392b;
+            color: white;
+        }
+
+        #demonio {
+            background-color: #9b59b6;
+            color: white;
+        }
+
+        #luz {
+            background-color: #f1c40f;
+            color: white;
+        }
+
+        #pistola {
+            background-color: #34495e;
+            color: white;
+        }
+
+        .contenedor-resultados {
+            margin-bottom: 20px;
+        }
+
+        #resultado {
+            font-size: 20px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-top: 20px;
+        }
+
+        .puntos {
+            font-size: 18px;
+        }
+
+        .puntos span {
+            font-weight: bold;
+            font-size: 22px;
+            color: #2980b9;
+        }
+
+        button#reiniciar {
+            background-color: #2980b9;
+            color: white;
+            padding: 10px 20px;
+            font-size: 18px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button#reiniciar:hover {
+            background-color: #3498db;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="JUEGO">
+
+        <h1>¡Bienvenido al Juego!</h1>
+
+        <p id="resultado">¡Vamos! Elige una opción para empezar a jugar.</p>
+
+        <div class="botones">
+
+            <button id="piedra">Piedra</button>
+            <button id="fuego">Fuego</button>
+            <button id="tijeras">Tijeras</button>
+            <button id="serpiente">Serpiente</button>
+            <button id="humano">Humano</button>
+            <button id="arbol">Árbol</button>
+            <button id="lobo">Lobo</button>
+            <button id="esponja">Esponja</button>
+            <button id="papel">Papel</button>
+            <button id="aire">Aire</button>
+            <button id="agua">Agua</button>
+            <button id="dragon">Dragón</button>
+            <button id="demonio">Demonio</button>
+            <button id="luz">Luz</button>
+            <button id="pistola">Pistola</button>
+
+        </div>
+
+        <div class="contenedor-resultados">
+
+            <p id="resultado">Selecciona tu opción, ¡y que comience la aventura!</p>
+
+        </div>
+
+        <div class="puntos">
+
+            <p>Ganadas: <span id="ganadas">0</span></p>
+            <p>Perdidas: <span id="perdidas">0</span></p>
+
+        </div>
+
+        <button id="reiniciar">¡Vamos de nuevo!</button>
+
+    </div>
+
+    <script>
+
+        class Opcion {
+            constructor(nombre, vencidos) {
+                this.nombre = nombre;
+                this.vencidos = vencidos;
+            }
+
+            venceA(opcion) {
+                return this.vencidos.includes(opcion.nombre);
+            }
+        }
+
+        const opciones = {
+            piedra: new Opcion('Piedra', ['Fuego', 'Tijeras', 'Serpiente', 'Humano', 'Arbol', 'Lobo', 'Esponja']),
+            fuego: new Opcion('Fuego', ['Tijeras', 'Serpiente', 'Humano', 'Arbol', 'Lobo', 'Esponja', 'Papel']),
+            tijeras: new Opcion('Tijeras', ['Serpiente', 'Humano', 'Arbol', 'Lobo', 'Esponja', 'Papel', 'Aire']),
+            serpiente: new Opcion('Serpiente', ['Humano', 'Arbol', 'Lobo', 'Esponja', 'Papel', 'Aire', 'Agua']),
+            humano: new Opcion('Humano', ['Arbol', 'Lobo', 'Esponja', 'Papel', 'Aire', 'Agua', 'Dragon']),
+            arbol: new Opcion('Arbol', ['Lobo', 'Esponja', 'Papel', 'Aire', 'Agua', 'Dragon', 'Demonio']),
+            lobo: new Opcion('Lobo', ['Esponja', 'Papel', 'Aire', 'Agua', 'Dragon', 'Demonio', 'Luz']),
+            esponja: new Opcion('Esponja', ['Papel', 'Aire', 'Agua', 'Dragon', 'Demonio', 'Luz', 'Pistola']),
+            papel: new Opcion('Papel', ['Aire', 'Agua', 'Dragon', 'Demonio', 'Luz', 'Pistola', 'Piedra']),
+            aire: new Opcion('Aire', ['Agua', 'Dragon', 'Demonio', 'Luz', 'Pistola', 'Piedra', 'Fuego']),
+            agua: new Opcion('Agua', ['Dragon', 'Demonio', 'Luz', 'Pistola', 'Piedra', 'Fuego', 'Tijeras']),
+            dragon: new Opcion('Dragon', ['Demonio', 'Luz', 'Pistola', 'Piedra', 'Fuego', 'Tijeras', 'Serpiente']),
+            demonio: new Opcion('Demonio', ['Luz', 'Pistola', 'Piedra', 'Fuego', 'Tijeras', 'Serpiente', 'Humano']),
+            luz: new Opcion('Luz', ['Pistola', 'Piedra', 'Fuego', 'Tijeras', 'Serpiente', 'Humano', 'Arbol']),
+            pistola: new Opcion('Pistola', ['Piedra', 'Fuego', 'Tijeras', 'Serpiente', 'Humano', 'Arbol', 'Lobo'])
+        };
+
+        let ganadas = 0;
+        let perdidas = 0;
+
+        function OpcionAleatoria() {
+            const opcionesArray = Object.values(opciones);
+            const indiceAleatorio = Math.floor(Math.random() * opcionesArray.length);
+            return opcionesArray[indiceAleatorio];
+        }
+
+        function Actualizar() {
+            document.getElementById('ganadas').textContent = ganadas;
+            document.getElementById('perdidas').textContent = perdidas;
+        }
+
+        function Partida(opcionUsuario) {
+            const opcionComputadora = OpcionAleatoria();
+            let resultado = `¡Oh no! La computadora eligió ${opcionComputadora.nombre}. `;
+
+            if (opcionUsuario.nombre === opcionComputadora.nombre) {
+                resultado += "¡Es un empate! Ambos hicieron la misma elección.";
+            } else if (opcionUsuario.venceA(opcionComputadora)) {
+                resultado += `¡Genial! Tu ${opcionUsuario.nombre} vence a su ${opcionComputadora.nombre}. ¡Bien hecho!`;
+                ganadas++;
+            } else {
+                resultado += `Ups, perdiste. Su ${opcionComputadora.nombre} venció a tu ${opcionUsuario.nombre}. ¡No te rindas!`;
+                perdidas++;
+            }
+
+            document.getElementById('resultado').textContent = resultado;
+            Actualizar();
+        }
+
+        document.getElementById('piedra').addEventListener('click', () => Partida(opciones.piedra));
+        document.getElementById('fuego').addEventListener('click', () => Partida(opciones.fuego));
+        document.getElementById('tijeras').addEventListener('click', () => Partida(opciones.tijeras));
+        document.getElementById('serpiente').addEventListener('click', () => Partida(opciones.serpiente));
+        document.getElementById('humano').addEventListener('click', () => Partida(opciones.humano));
+        document.getElementById('arbol').addEventListener('click', () => Partida(opciones.arbol));
+        document.getElementById('lobo').addEventListener('click', () => Partida(opciones.lobo));
+        document.getElementById('esponja').addEventListener('click', () => Partida(opciones.esponja));
+        document.getElementById('papel').addEventListener('click', () => Partida(opciones.papel));
+        document.getElementById('aire').addEventListener('click', () => Partida(opciones.aire));
+        document.getElementById('agua').addEventListener('click', () => Partida(opciones.agua));
+        document.getElementById('dragon').addEventListener('click', () => Partida(opciones.dragon));
+        document.getElementById('demonio').addEventListener('click', () => Partida(opciones.demonio));
+        document.getElementById('luz').addEventListener('click', () => Partida(opciones.luz));
+        document.getElementById('pistola').addEventListener('click', () => Partida(opciones.pistola));
+
+        document.getElementById('reiniciar').addEventListener('click', () => {
+            ganadas = 0;
+            perdidas = 0;
+            Actualizar();
+            document.getElementById('resultado').textContent = "¡Vamos de nuevo! Elige tu opción.";
+        });
+    </script>
+</body>
+</html>
