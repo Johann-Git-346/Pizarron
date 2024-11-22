@@ -1,302 +1,226 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <title>Juego</title>
+    <title>Tarea 2</title>
     <style>
-        body {
-            background: linear-gradient(135deg, #f6d365, #fda085);
-            font-family: 'Comic Sans MS', cursive, sans-serif; /* Fuente amigable */
-            margin: 0;
-            padding: 0;
+          body {
+            font-family: Arial, sans-serif;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            height: 100vh;
+            margin: 0;
+            background-color: #f9f9f9;
             color: #333;
         }
 
-        .JUEGO {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            width: 450px;
-        }
-
         h1 {
-            font-size: 28px;
-            color: #2c3e50;
-            margin-bottom: 20px;
-        }
-
-        .botones {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-
-        .botones button {
-            padding: 12px 18px;
-            border-radius: 12px;
-            background-color: #ff6347;
-            color: white;
-            font-weight: bold;
-            font-size: 18px;
-            border: none;
-            cursor: pointer;
-            transition: transform 0.3s ease, background-color 0.3s ease;
-        }
-
-        .botones button:hover {
-            background-color: #ff4500;
-            transform: scale(1.1);
-        }
-
-        #piedra {
-            background-color: #9e9e9e;
-            color: white;
-        }
-
-        #fuego {
-            background-color: #ff5733;
-            color: white;
-        }
-
-        #tijeras {
-            background-color: #f1c40f;
-            color: white;
-        }
-
-        #serpiente {
-            background-color: #27ae60;
-            color: white;
-        }
-
-        #humano {
-            background-color: #3498db;
-            color: white;
-        }
-
-        #arbol {
-            background-color: #2ecc71;
-            color: white;
-        }
-
-        #lobo {
-            background-color: #8e44ad;
-            color: white;
-        }
-
-        #esponja {
-            background-color: #f39c12;
-            color: white;
-        }
-
-        #papel {
-            background-color: #2980b9;
-            color: white;
-        }
-
-        #aire {
-            background-color: #00bfff;
-            color: white;
-        }
-
-        #agua {
-            background-color: #1abc9c;
-            color: white;
-        }
-
-        #dragon {
-            background-color: #c0392b;
-            color: white;
-        }
-
-        #demonio {
-            background-color: #9b59b6;
-            color: white;
-        }
-
-        #luz {
-            background-color: #f1c40f;
-            color: white;
-        }
-
-        #pistola {
-            background-color: #34495e;
-            color: white;
-        }
-
-        .contenedor-resultados {
-            margin-bottom: 20px;
-        }
-
-        #resultado {
-            font-size: 20px;
-            font-weight: bold;
-            color: #2c3e50;
+            text-align: center;
             margin-top: 20px;
+            font-size: 24px;
+            color: #444;
         }
 
-        .puntos {
-            font-size: 18px;
-        }
-
-        .puntos span {
-            font-weight: bold;
-            font-size: 22px;
-            color: #2980b9;
-        }
-
-        button#reiniciar {
-            background-color: #2980b9;
-            color: white;
-            padding: 10px 20px;
-            font-size: 18px;
+        #info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #ddd;
             border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            width: 90%;
+            max-width: 600px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #dato {
+            flex: 1;
+            padding: 10px;
+            margin-right: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            transition: border-color 0.3s;
+        }
+
+        #dato:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 14px;
+            border: 1px solid #007bff;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 20px;
+            color: #555;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            width: 90%;
+            max-width: 600px;
+            margin-bottom: 20px;
+        }
+
+        #x, #z {
+            border: 1px solid #ddd;
+            padding: 20px;
+            width: 48%;
+            background-color: #fff;
+            min-height: 200px;
+            box-sizing: border-box;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #x h3, #z h3 {
+            margin-top: 0;
+            font-size: 18px;
+            color: #007bff;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 5px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .item button {
+            padding: 5px 10px;
+            font-size: 12px;
             border: none;
+            border-radius: 3px;
+            background-color: #007bff;
+            color: #fff;
             cursor: pointer;
             transition: background-color 0.3s;
         }
 
-        button#reiniciar:hover {
-            background-color: #3498db;
+        .item button:hover {
+            background-color: #0056b3;
         }
 
+        .item button:active {
+            background-color: #003f8a;
+        }
+
+        .item {
+            padding: 8px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+            gap: 10px;
+        }
+
+        .item.highlighted {
+            background-color: #d4edda;
+        }
     </style>
 </head>
 <body>
+    <h1>Datos dinámicos con checkbox</h1>
+    <form id="info">
+        <label for="dato">Ingrese su información:</label>
+        <input type="text" id="dato" placeholder="Escribe aquí...">
+        <label><input type="checkbox" id="checkbox1"> Alto</label>
+        <label><input type="checkbox" id="checkbox2"> Bajo</label><br>
+        <button type="button" id="boton">Agregar</button>
+    </form>
 
-    <div class="JUEGO">
-
-        <h1>¡Bienvenido al Juego!</h1>
-
-        <p id="resultado">¡Vamos! Elige una opción para empezar a jugar.</p>
-
-        <div class="botones">
-
-            <button id="piedra">Piedra</button>
-            <button id="fuego">Fuego</button>
-            <button id="tijeras">Tijeras</button>
-            <button id="serpiente">Serpiente</button>
-            <button id="humano">Humano</button>
-            <button id="arbol">Árbol</button>
-            <button id="lobo">Lobo</button>
-            <button id="esponja">Esponja</button>
-            <button id="papel">Papel</button>
-            <button id="aire">Aire</button>
-            <button id="agua">Agua</button>
-            <button id="dragon">Dragón</button>
-            <button id="demonio">Demonio</button>
-            <button id="luz">Luz</button>
-            <button id="pistola">Pistola</button>
-
+    <h2>Datos ingresados</h2>
+    <div class="container">
+        <div id="x"> 
+            <h3>Alto:</h3> 
+            <ul id="resultadoA"></ul> 
         </div>
-
-        <div class="contenedor-resultados">
-
-            <p id="resultado">Selecciona tu opción, ¡y que comience la aventura!</p>
-
+        <div id="z"> 
+            <h3>Bajo:</h3> 
+            <ul id="resultadoB"></ul> 
         </div>
-
-        <div class="puntos">
-
-            <p>Ganadas: <span id="ganadas">0</span></p>
-            <p>Perdidas: <span id="perdidas">0</span></p>
-
-        </div>
-
-        <button id="reiniciar">¡Vamos de nuevo!</button>
-
     </div>
 
     <script>
+        const checkbox1 = document.getElementById('checkbox1');
+        const checkbox2 = document.getElementById('checkbox2');
+        const boton = document.getElementById('boton');
+        const resultadoA = document.getElementById('resultadoA');
+        const resultadoB = document.getElementById('resultadoB');
 
-        class Opcion {
-            constructor(nombre, vencidos) {
-                this.nombre = nombre;
-                this.vencidos = vencidos;
+        boton.addEventListener('click', () => {
+            const dato = document.getElementById('dato').value;
+
+            if (!dato || (!checkbox1.checked && !checkbox2.checked)) {
+                alert('Por favor, ingrese un dato y seleccione al menos una opción.');
+                return;
             }
 
-            venceA(opcion) {
-                return this.vencidos.includes(opcion.nombre);
+            if (checkbox1.checked) {
+                agregarDato(resultadoA, dato, "Alto");
             }
-        }
-
-        const opciones = {
-            piedra: new Opcion('Piedra', ['Fuego', 'Tijeras', 'Serpiente', 'Humano', 'Arbol', 'Lobo', 'Esponja']),
-            fuego: new Opcion('Fuego', ['Tijeras', 'Serpiente', 'Humano', 'Arbol', 'Lobo', 'Esponja', 'Papel']),
-            tijeras: new Opcion('Tijeras', ['Serpiente', 'Humano', 'Arbol', 'Lobo', 'Esponja', 'Papel', 'Aire']),
-            serpiente: new Opcion('Serpiente', ['Humano', 'Arbol', 'Lobo', 'Esponja', 'Papel', 'Aire', 'Agua']),
-            humano: new Opcion('Humano', ['Arbol', 'Lobo', 'Esponja', 'Papel', 'Aire', 'Agua', 'Dragon']),
-            arbol: new Opcion('Arbol', ['Lobo', 'Esponja', 'Papel', 'Aire', 'Agua', 'Dragon', 'Demonio']),
-            lobo: new Opcion('Lobo', ['Esponja', 'Papel', 'Aire', 'Agua', 'Dragon', 'Demonio', 'Luz']),
-            esponja: new Opcion('Esponja', ['Papel', 'Aire', 'Agua', 'Dragon', 'Demonio', 'Luz', 'Pistola']),
-            papel: new Opcion('Papel', ['Aire', 'Agua', 'Dragon', 'Demonio', 'Luz', 'Pistola', 'Piedra']),
-            aire: new Opcion('Aire', ['Agua', 'Dragon', 'Demonio', 'Luz', 'Pistola', 'Piedra', 'Fuego']),
-            agua: new Opcion('Agua', ['Dragon', 'Demonio', 'Luz', 'Pistola', 'Piedra', 'Fuego', 'Tijeras']),
-            dragon: new Opcion('Dragon', ['Demonio', 'Luz', 'Pistola', 'Piedra', 'Fuego', 'Tijeras', 'Serpiente']),
-            demonio: new Opcion('Demonio', ['Luz', 'Pistola', 'Piedra', 'Fuego', 'Tijeras', 'Serpiente', 'Humano']),
-            luz: new Opcion('Luz', ['Pistola', 'Piedra', 'Fuego', 'Tijeras', 'Serpiente', 'Humano', 'Arbol']),
-            pistola: new Opcion('Pistola', ['Piedra', 'Fuego', 'Tijeras', 'Serpiente', 'Humano', 'Arbol', 'Lobo'])
-        };
-
-        let ganadas = 0;
-        let perdidas = 0;
-
-        function OpcionAleatoria() {
-            const opcionesArray = Object.values(opciones);
-            const indiceAleatorio = Math.floor(Math.random() * opcionesArray.length);
-            return opcionesArray[indiceAleatorio];
-        }
-
-        function Actualizar() {
-            document.getElementById('ganadas').textContent = ganadas;
-            document.getElementById('perdidas').textContent = perdidas;
-        }
-
-        function Partida(opcionUsuario) {
-            const opcionComputadora = OpcionAleatoria();
-            let resultado = `¡Oh no! La computadora eligió ${opcionComputadora.nombre}. `;
-
-            if (opcionUsuario.nombre === opcionComputadora.nombre) {
-                resultado += "¡Es un empate! Ambos hicieron la misma elección.";
-            } else if (opcionUsuario.venceA(opcionComputadora)) {
-                resultado += `¡Genial! Tu ${opcionUsuario.nombre} vence a su ${opcionComputadora.nombre}. ¡Bien hecho!`;
-                ganadas++;
-            } else {
-                resultado += `Ups, perdiste. Su ${opcionComputadora.nombre} venció a tu ${opcionUsuario.nombre}. ¡No te rindas!`;
-                perdidas++;
+            if (checkbox2.checked) {
+                agregarDato(resultadoB, dato, "Bajo");
             }
 
-            document.getElementById('resultado').textContent = resultado;
-            Actualizar();
-        }
-
-        document.getElementById('piedra').addEventListener('click', () => Partida(opciones.piedra));
-        document.getElementById('fuego').addEventListener('click', () => Partida(opciones.fuego));
-        document.getElementById('tijeras').addEventListener('click', () => Partida(opciones.tijeras));
-        document.getElementById('serpiente').addEventListener('click', () => Partida(opciones.serpiente));
-        document.getElementById('humano').addEventListener('click', () => Partida(opciones.humano));
-        document.getElementById('arbol').addEventListener('click', () => Partida(opciones.arbol));
-        document.getElementById('lobo').addEventListener('click', () => Partida(opciones.lobo));
-        document.getElementById('esponja').addEventListener('click', () => Partida(opciones.esponja));
-        document.getElementById('papel').addEventListener('click', () => Partida(opciones.papel));
-        document.getElementById('aire').addEventListener('click', () => Partida(opciones.aire));
-        document.getElementById('agua').addEventListener('click', () => Partida(opciones.agua));
-        document.getElementById('dragon').addEventListener('click', () => Partida(opciones.dragon));
-        document.getElementById('demonio').addEventListener('click', () => Partida(opciones.demonio));
-        document.getElementById('luz').addEventListener('click', () => Partida(opciones.luz));
-        document.getElementById('pistola').addEventListener('click', () => Partida(opciones.pistola));
-
-        document.getElementById('reiniciar').addEventListener('click', () => {
-            ganadas = 0;
-            perdidas = 0;
-            Actualizar();
-            document.getElementById('resultado').textContent = "¡Vamos de nuevo! Elige tu opción.";
+            document.getElementById('dato').value = '';
+            checkbox1.checked = false;
+            checkbox2.checked = false;
         });
+
+        function agregarDato(lista, dato, tipo) {
+            const li = document.createElement('li');
+            li.className = 'item';
+            li.textContent = dato;
+
+            const itemCheckbox = document.createElement('input');
+            itemCheckbox.type = 'checkbox';
+
+            const estadoTexto = document.createElement('span');
+            estadoTexto.textContent = "Realizar";
+
+            itemCheckbox.addEventListener('change', () => {
+                if (itemCheckbox.checked) {
+                    li.classList.add('highlighted');
+                    estadoTexto.textContent = "Hecho";
+                } else {
+                    li.classList.remove('highlighted');
+                    estadoTexto.textContent = "Realizar";
+                }
+            });
+
+            const eliminarBtn = document.createElement('button');
+            eliminarBtn.textContent = 'Eliminar';
+            eliminarBtn.onclick = () => li.remove();
+
+            li.appendChild(itemCheckbox);
+            li.appendChild(estadoTexto);
+            li.appendChild(eliminarBtn);
+
+            lista.appendChild(li);
+        }
     </script>
 </body>
 </html>
